@@ -1,36 +1,72 @@
-# Conversor-de-Moedas
-# Conversor de Moedas
+// Conversor-de-Moedas
+import javax.swing.JOptionPane;
 
-![Conversor de Moedas]
+public class ConversorDeMoedas {
+    public static void main(String[] args) {
+        // Array com as opções de moedas
+        String[] currencyOptions = {
+            "Reais",
+            "Dólar",
+            "Euro",
+            "Libras Esterlinas"
+        };
 
-Este programa Java permite converter valores entre diferentes moedas, como Reais, Dólar, Euro e Libras Esterlinas.
+        // Seleção da moeda de origem
+        int fromCurrencyChoice = JOptionPane.showOptionDialog(
+            null,
+            "Selecione a moeda de origem",
+            "Conversor de Moedas",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            currencyOptions,
+            currencyOptions[0]
+        );
 
-## Como executar o programa
+        // Seleção da moeda de destino
+        int toCurrencyChoice = JOptionPane.showOptionDialog(
+            null,
+            "Selecione a moeda de destino",
+            "Conversor de Moedas",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            currencyOptions,
+            currencyOptions[1]
+        );
 
-1. Certifique-se de ter o Java Development Kit (JDK) instalado no seu computador.
-2. Baixe o arquivo `ConversorDeMoedas.java`.
-3. Abra o terminal ou prompt de comando e navegue até o diretório onde o arquivo `ConversorDeMoedas.java` foi salvo.
-4. Compile o código Java executando o seguinte comando:
+        // Solicitação do valor a ser convertido
+        double amount = getAmountFromUser("Digite o valor em " + currencyOptions[fromCurrencyChoice] + ":");
 
-![Compilar código Java] <`javacConversorDeMoedas.java`>.
+        // Conversão da moeda
+        double convertedAmount = convertCurrency(amount, fromCurrencyChoice, toCurrencyChoice);
 
-6. Após a compilação bem-sucedida, execute o programa digitando o seguinte comando:
+        // Exibição do valor convertido
+        showMessage("Valor convertido: " + convertedAmount + " " + currencyOptions[toCurrencyChoice]);
+    }
 
-![Executar programa] <`java ConversorDeMoedas`>.
+    // Solicitação do valor ao usuário
+    private static double getAmountFromUser(String message) {
+        String input = JOptionPane.showInputDialog(null, message);
+        try {
+            return Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            showMessage("Valor inválido. Tente novamente.");
+            return getAmountFromUser(message);
+        }
+    }
 
-8. O programa será iniciado e você verá uma caixa de diálogo onde poderá selecionar a moeda de origem e a moeda de destino, bem como digitar o valor a ser convertido.
-9. Após inserir o valor, o programa exibirá o valor convertido em uma nova caixa de diálogo.
+    // Conversão da moeda
+    private static double convertCurrency(double amount, int fromCurrencyChoice, int toCurrencyChoice) {
+        double[] exchangeRates = { 1.0, 0.188, 0.116, 0.141 }; // Taxas de câmbio corrigidas
+        double fromRate = exchangeRates[fromCurrencyChoice];
+        double toRate = exchangeRates[toCurrencyChoice];
 
-## Personalização das taxas de câmbio
+        return amount * (toRate / fromRate);
+    }
 
-O programa usa taxas de câmbio fictícias para fins de demonstração. Se desejar personalizar as taxas de câmbio, você pode ajustar o array `exchangeRates` na função `convertCurrency`. Certifique-se de inserir as taxas de câmbio corretas entre as moedas desejadas.
-
-## Observações
-
-- O programa utiliza a biblioteca `javax.swing.JOptionPane` para exibir caixas de diálogo para interação com o usuário.
-- Os valores inseridos devem ser números válidos. Caso contrário, uma mensagem de erro será exibida e será solicitado um novo valor.
-- Certifique-se de fornecer as taxas de câmbio corretas para obter resultados precisos.
-
-![Exemplo de Conversão]
-
-Espero que isso ajude a entender como executar e usar o programa de conversão de moedas. Se você tiver mais perguntas, sinta-se à vontade para perguntar.
+    // Exibição de uma mensagem
+    private static void showMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+}
