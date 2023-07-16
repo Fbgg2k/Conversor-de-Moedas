@@ -2,6 +2,7 @@ import javax.swing.JOptionPane;
 
 public class ConversorDeMoedas {
     public static void main(String[] args) {
+        // Array com as opções de moedas
         String[] currencyOptions = {
             "Reais",
             "Dólar",
@@ -9,6 +10,7 @@ public class ConversorDeMoedas {
             "Libras Esterlinas"
         };
 
+        // Seleção da moeda de origem
         int fromCurrencyChoice = JOptionPane.showOptionDialog(
             null,
             "Selecione a moeda de origem",
@@ -20,6 +22,7 @@ public class ConversorDeMoedas {
             currencyOptions[0]
         );
 
+        // Seleção da moeda de destino
         int toCurrencyChoice = JOptionPane.showOptionDialog(
             null,
             "Selecione a moeda de destino",
@@ -31,12 +34,17 @@ public class ConversorDeMoedas {
             currencyOptions[1]
         );
 
+        // Solicitação do valor a ser convertido
         double amount = getAmountFromUser("Digite o valor em " + currencyOptions[fromCurrencyChoice] + ":");
 
+        // Conversão da moeda
         double convertedAmount = convertCurrency(amount, fromCurrencyChoice, toCurrencyChoice);
+
+        // Exibição do valor convertido
         showMessage("Valor convertido: " + convertedAmount + " " + currencyOptions[toCurrencyChoice]);
     }
 
+    // Solicitação do valor ao usuário
     private static double getAmountFromUser(String message) {
         String input = JOptionPane.showInputDialog(null, message);
         try {
@@ -47,6 +55,7 @@ public class ConversorDeMoedas {
         }
     }
 
+    // Conversão da moeda
     private static double convertCurrency(double amount, int fromCurrencyChoice, int toCurrencyChoice) {
         double[] exchangeRates = { 1.0, 0.188, 0.116, 0.141 }; // Taxas de câmbio corrigidas
         double fromRate = exchangeRates[fromCurrencyChoice];
@@ -55,8 +64,8 @@ public class ConversorDeMoedas {
         return amount * (toRate / fromRate);
     }
 
+    // Exibição de uma mensagem
     private static void showMessage(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
 }
-
