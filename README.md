@@ -11,12 +11,13 @@ Este programa Java permite converter valores entre diferentes moedas, como Reais
 2. Baixe o arquivo `ConversorDeMoedas.java`.
 3. Abra o terminal ou prompt de comando e navegue até o diretório onde o arquivo `ConversorDeMoedas.java` foi salvo.
 4. Compile o código Java executando o seguinte comando:
-![Compilar código Java]
-`javacConversorDeMoedas.java`.
+
+![Compilar código Java] <`javacConversorDeMoedas.java`>.
 
 6. Após a compilação bem-sucedida, execute o programa digitando o seguinte comando:
-![Executar programa]
-`java ConversorDeMoedas`.
+
+![Executar programa] <`java ConversorDeMoedas`>.
+
 8. O programa será iniciado e você verá uma caixa de diálogo onde poderá selecionar a moeda de origem e a moeda de destino, bem como digitar o valor a ser convertido.
 9. Após inserir o valor, o programa exibirá o valor convertido em uma nova caixa de diálogo.
 
